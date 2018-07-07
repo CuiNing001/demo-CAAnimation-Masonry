@@ -1,5 +1,7 @@
+[![Build Status]]
+
 ## demo-CAAnimation-Masonry
-[![Build Status]
+
 #####Masonry
 ---
 
