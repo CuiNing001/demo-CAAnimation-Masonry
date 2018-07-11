@@ -380,3 +380,123 @@ CABasicAnimation *animation_1 = [CABasicAnimation animationWithKeyPath:@"transfo
 <font color=#006400>3.保持动画最后的状态不变需同时设置fillMode=kCAFillModeForwards和removedOnCompletion = NO</font>
 >
 <font color=#006400>4.</font>
+
+
+> ###CAKeyframeAnimation:关键帧动画
+> >设置keypath起点/关键点/终点的值,每一帧对应的时间,动画延着设定的点进行移动.
+
+* <font color=#FF8C00>@param:[values]关键帧数组对象,动画会在对应的时间内一次执行每一帧动画</font>
+* <font color=#FF8C00>@param:[path]动画路径对象,可以指定一个路径,在执行动画是延着路径移动</font>
+* <font color=#FF8C00>@param:[keyTimes]设置关键帧对应的时间点,范围(0-1),如果没有设置此属性,则每一帧的动画时间平分</font>
+* <font color=#FF8C00></font>
+
+> position动画
+
+```
+CAkeyframeAnimation *keyAnimation = [CAKeyframeAnimation animationWithKeyPath:"position"];
+keyAnimation.duration = 4;
+keyAnimation.fillMode = kCAFillModeBackwards;
+keyAnimation.removedOnCompletion = NO;
+keyAnimation.repeatCount = 1;
+keyAnimation.autoreverses = NO;
+keyAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+CGPoint myPoint = _animationView.center;
+NSValue *value_0 = [NSValue valueWithCGPoint:myPoint];
+NSValue *value_1 = [NSValue valueWithCGPoint:CGPointMake(myPoint.x+100, myPoint.y)];
+NSValue *value_2 = [NSValue valueWithCGPoint:CGPointMake(myPoint.x+100, myPoint.y+100)];
+NSValue *value_3 = [NSValue valueWithCGPoint:CGPointMake(myPoint.x, myPoint.y+100)];
+NSValue *value_4 = [NSValue valueWithCGPoint:CGPointMake(myPoint.x, myPoint.y)];
+keyAnimation.values = [NSArray arrayWithObjects:value_0,value_1,value_2,value_3,value_4, nil];
+NSNumber *number_0 = [NSNumber numberWithFloat:0.0];
+NSNumber *number_1 = [NSNumber numberWithFloat:0.1];
+NSNumber *number_2 = [NSNumber numberWithFloat:0.2];
+NSNumber *number_3 = [NSNumber numberWithFloat:0.8];
+NSNumber *number_4 = [NSNumber numberWithFloat:1.0];
+keyAnimation.keyTimes = [NSArray arrayWithObjects:number_0,number_1,number_2,number_3,number_4, nil];
+[_animationView.layer addAnimation:keyAnimation forKey:@"positionAni"];
+```
+
+> cornerRadius动画
+
+```
+    CAKeyframeAnimation *keyAnimation = [CAKeyframeAnimation animationWithKeyPath:@"cornerRadius"];
+    keyAnimation.duration =4;
+    keyAnimation.repeatCount = 2;
+    keyAnimation.autoreverses = NO;
+    keyAnimation.removedOnCompletion = NO;
+    keyAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    NSNumber *number_0 = [NSNumber numberWithFloat:0];
+    NSNumber *number_1 = [NSNumber numberWithFloat:50];
+    NSNumber *number_2 = [NSNumber numberWithBool:20];
+    NSNumber *number_3 = [NSNumber numberWithFloat:50];
+    NSNumber *number_4 = [NSNumber numberWithFloat:0];
+    keyAnimation.values = @[number_0,number_1,number_2,number_3,number_4];
+    [_animationView.layer addAnimation:keyAnimation forKey:@"radiusAnimation"];
+```
+
+> path
+
+```
+    CAKeyframeAnimation *keyAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+    // 创建路径
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGFloat x = _animationView.frame.origin.x;
+    CGFloat y = _animationView.frame.origin.y;
+    // 路径范围
+    CGPathAddEllipseInRect(path, NULL, CGRectMake(x-100, y, 200, 200));
+    keyAnimation.path = path;
+    // 释放路径(带Create的函数创建的对象都需要手动释放,否则会内存泄露)
+    CFRelease(path);
+    keyAnimation.duration = 10;
+    [_animationView.layer addAnimation:keyAnimation forKey:@"pathAnimation"];
+```
+
+### CATransition
+---
+>转场动画
+
+| type | example | 动作 |
+|:-- |:-- |:-- |
+| <font color=#FF8C00>公用API</font>  |
+|  | kCATransitionMoveIn | 覆盖 |
+|  | kCATransitionMoveIn | 覆盖 |
+|  | kCATransitionPush | 推出 |
+|  | kCATransitionReveal | 揭开 |
+| <font color=#FF8C00>私有API</font> | |
+|  | @"cube" | 翻转 |
+|  | @"suckEffect" | 移动到左上角消失 |
+|  | @"oglFlip" | 绕中心点翻转 |
+|  | @"rippleEffect" | 文本抖动 |
+|  | @"p7ageCurl" | 渐变 |
+|  | @"pageUnCurl" | 翻书 |
+|  | @"cameraIrisHollowClose" | 镜头打开 |
+|  | @"cameraIrisHollowOpen" | 镜头关闭 |
+
+
+| subtype | example | 动作 |
+|:-- |:--|:--|
+|  | kCATransitionFromLeft |  |
+|  | kCATransitionFromRight |  |
+|  | kCATransitionFromTop |  |
+|  | kCATransitionFromBottom |  |
+
+```
+/*
+ * @param:type  动画效果
+ * @parma:subtype  动画展现方式
+*/
+- (void)addTransitionWithType:(NSString *)type subType:(NSString *)subType{
+    CATransition *animation = [CATransition animation];
+    animation.type = type;
+    animation.subtype = subType;
+    animation.duration = 3.0f;
+    _view_2.hidden = YES;
+    [_view_2.layer addAnimation:animation forKey:@"animation"];
+}
+
+//调用
+[self addTransitionWithType:kCATransitionPush subType:kCATransitionFromTop];
+[self addTransitionWithType:@"rippleEffect" subType:kCATransitionFromBottom];
+```
+
+> tip:调用私有API会影响上架
