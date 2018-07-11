@@ -37,6 +37,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.navigationItem.title = @"CABaseAnimation";
     
     self.view_1 = [[UIView alloc]init];
     self.view_2 = [[UIView alloc]init];

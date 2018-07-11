@@ -24,7 +24,7 @@
     
     FirstViewController *firstVC = [FirstViewController new];
     UINavigationController *navFirst = [[UINavigationController alloc]initWithRootViewController:firstVC];
-    firstVC.title = @"First";
+    firstVC.title = @"FIRST";
     firstVC.view.backgroundColor = COLOR_BG_MAIN;
     [navFirst.navigationBar setBarStyle:UIBarStyleBlack];
 //    navFirst.navigationBar.barTintColor = [UIColor blackColor];
@@ -32,9 +32,10 @@
     navFirst.tabBarItem.image = [[UIImage imageNamed:@"first_tabbar_nor"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     navFirst.tabBarItem.selectedImage = [[UIImage imageNamed:@"first_tabbar_sel"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
+    
     SecondViewController *secVC = [SecondViewController new];
     UINavigationController *navSec = [[UINavigationController alloc]initWithRootViewController:secVC];
-    secVC.title = @"Sec";
+    secVC.title = @"SECOND";
     secVC.view.backgroundColor = COLOR_BG_MAIN;
     [navSec.navigationBar setBarStyle:UIBarStyleBlack];
     navSec.tabBarItem.image = [[UIImage imageNamed:@"second_tabbar_nor"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -42,7 +43,7 @@
     
     ThirdViewController *thirdVC = [ThirdViewController new];
     UINavigationController *navThird = [[UINavigationController alloc]initWithRootViewController:thirdVC];
-    thirdVC.title = @"Third";
+    thirdVC.title = @"THREE";
     thirdVC.view.backgroundColor = COLOR_BG_MAIN;
     [navThird.navigationBar setBarStyle:UIBarStyleBlack];
     navThird.tabBarItem.image = [[UIImage imageNamed:@"third_tabbar_nor"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -50,7 +51,7 @@
     
     FourthViewController *fourthVC = [FourthViewController new];
     UINavigationController *navFourth = [[UINavigationController alloc]initWithRootViewController:fourthVC];
-    fourthVC.title = @"Fourth";
+    fourthVC.title = @"FOUR";
     fourthVC.view.backgroundColor = COLOR_BG_MAIN;
     [navFourth.navigationBar setBarStyle:UIBarStyleBlack];
     navFourth.tabBarItem.image = [[UIImage imageNamed:@"fourth_tabbar_nor"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];

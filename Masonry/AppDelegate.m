@@ -24,6 +24,8 @@
 //    [tabBarController.tabBar setBarStyle:UIBarStyleBlack];
     self.window.rootViewController = tabBarController;
     self.window.backgroundColor = [UIColor whiteColor];
+    // 设置导航栏返回按钮颜色
+    [[UINavigationBar appearance]setTintColor:[UIColor whiteColor]];
     [self.window makeKeyAndVisible];
     
     return YES;

@@ -7,6 +7,7 @@
 //
 
 #import "ThirdViewController.h"
+#import "BezierPathViewController.h"
 
 @interface ThirdViewController ()
 
@@ -19,6 +20,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.navigationItem.title = @"CAKeyframeAnimation";
+    
+    // 修改系统返回按钮
+    UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.backBarButtonItem = item;
     
     NSArray *itemArr = [NSArray arrayWithObjects:@"values_square",@"vualues_radius",@"path_cyclo",@"path_BezierPath", nil];
     UISegmentedControl *segment = [[UISegmentedControl alloc]initWithItems:itemArr];
@@ -120,8 +126,30 @@
 
 - (void)animationThree{
     
+//    CGPoint layerCenter = CGPointMake(CGRectGetWidth(self.view.frame)/2, CGRectGetWidth(self.view.frame)/2);
+//    CAShapeLayer *layer = [CAShapeLayer layer];
+//    layer.frame = self.view.bounds;
+//    layer.lineWidth = 6.0;
+//    layer.strokeColor = [UIColor redColor].CGColor;
+//    layer.fillColor = [UIColor whiteColor].CGColor;
+//
+//    UIBezierPath* path = [UIBezierPath bezierPath];
+//    [path addArcWithCenter:layerCenter radius:50 startAngle:0.0 endAngle:M_PI*2 clockwise:YES];
+//    layer.path = path.CGPath;
+//
+//    UIGraphicsBeginImageContext(self.view.bounds.size);
+//    [path stroke];
+//    [path fill];
+//    UIGraphicsEndImageContext();
+//    
+//    [self.view.layer addSublayer:layer];
     
+    BezierPathViewController *bezierVC = [[BezierPathViewController alloc]init];
+    bezierVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:bezierVC animated:YES];
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

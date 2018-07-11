@@ -18,6 +18,8 @@
 		CE6B0B961FEA41BA005A25B9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE6B0B941FEA41BA005A25B9 /* LaunchScreen.storyboard */; };
 		CE6B0BA11FEA41BB005A25B9 /* MasonryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6B0BA01FEA41BB005A25B9 /* MasonryTests.m */; };
 		CE6B0BAC1FEA41BB005A25B9 /* MasonryUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6B0BAB1FEA41BB005A25B9 /* MasonryUITests.m */; };
+		CE8EF0C020F45C3300D5EDB7 /* BezierPathView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8EF0BF20F45C3300D5EDB7 /* BezierPathView.m */; };
+		CE8EF0C620F45C6700D5EDB7 /* BezierPathViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8EF0C520F45C6700D5EDB7 /* BezierPathViewController.m */; };
 		CEC592DE20E47E6B001FEE73 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC592DD20E47E6B001FEE73 /* FirstViewController.m */; };
 		CEC592E120E47E77001FEE73 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC592E020E47E77001FEE73 /* SecondViewController.m */; };
 		CEC592E420E47E83001FEE73 /* ThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC592E320E47E83001FEE73 /* ThirdViewController.m */; };
@@ -63,6 +65,10 @@
 		CE6B0BA71FEA41BB005A25B9 /* MasonryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MasonryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE6B0BAB1FEA41BB005A25B9 /* MasonryUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasonryUITests.m; sourceTree = "<group>"; };
 		CE6B0BAD1FEA41BB005A25B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE8EF0BE20F45C3300D5EDB7 /* BezierPathView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BezierPathView.h; sourceTree = "<group>"; };
+		CE8EF0BF20F45C3300D5EDB7 /* BezierPathView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BezierPathView.m; sourceTree = "<group>"; };
+		CE8EF0C420F45C6700D5EDB7 /* BezierPathViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BezierPathViewController.h; sourceTree = "<group>"; };
+		CE8EF0C520F45C6700D5EDB7 /* BezierPathViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BezierPathViewController.m; sourceTree = "<group>"; };
 		CEC592DC20E47E6B001FEE73 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
 		CEC592DD20E47E6B001FEE73 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		CEC592DF20E47E77001FEE73 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
@@ -158,6 +164,10 @@
 				CEC592E320E47E83001FEE73 /* ThirdViewController.m */,
 				CEC592E520E47E9F001FEE73 /* FourthViewController.h */,
 				CEC592E620E47E9F001FEE73 /* FourthViewController.m */,
+				CE8EF0C420F45C6700D5EDB7 /* BezierPathViewController.h */,
+				CE8EF0C520F45C6700D5EDB7 /* BezierPathViewController.m */,
+				CE8EF0BE20F45C3300D5EDB7 /* BezierPathView.h */,
+				CE8EF0BF20F45C3300D5EDB7 /* BezierPathView.m */,
 				CEC592EC20E48DAC001FEE73 /* CTabbarViewController.h */,
 				CEC592ED20E48DAC001FEE73 /* CTabbarViewController.m */,
 				CE626BC420E5D7EE00E8B8DF /* CollectionViewCell.h */,
@@ -383,9 +393,11 @@
 			files = (
 				CEC592E120E47E77001FEE73 /* SecondViewController.m in Sources */,
 				CEC592EE20E48DAC001FEE73 /* CTabbarViewController.m in Sources */,
+				CE8EF0C020F45C3300D5EDB7 /* BezierPathView.m in Sources */,
 				CE6B0B8E1FEA41BA005A25B9 /* ViewController.m in Sources */,
 				CE626BC720E5D7EE00E8B8DF /* CollectionViewCell.m in Sources */,
 				CEC592E420E47E83001FEE73 /* ThirdViewController.m in Sources */,
+				CE8EF0C620F45C6700D5EDB7 /* BezierPathViewController.m in Sources */,
 				CE6B0B8B1FEA41BA005A25B9 /* AppDelegate.m in Sources */,
 				CE6B0B881FEA41BA005A25B9 /* main.m in Sources */,
 				CEC592E720E47E9F001FEE73 /* FourthViewController.m in Sources */,
