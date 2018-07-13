@@ -11,6 +11,7 @@
 #import "SecondViewController.h"
 #import "ThirdViewController.h"
 #import "FourthViewController.h"
+#import "FifthViewController.h"
 
 @interface CTabbarViewController ()
 
@@ -57,7 +58,15 @@
     navFourth.tabBarItem.image = [[UIImage imageNamed:@"fourth_tabbar_nor"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     navFourth.tabBarItem.selectedImage = [[UIImage imageNamed:@"fourth_tabbar_sel"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
-    NSArray *vcArray = [NSArray arrayWithObjects:navFirst,navSec,navThird,navFourth, nil];
+    FifthViewController *fifthVC = [FifthViewController new];
+    UINavigationController *navFifth = [[UINavigationController alloc]initWithRootViewController:fifthVC];
+    fifthVC.title = @"FIVE";
+    fifthVC.view.backgroundColor = COLOR_BG_MAIN;
+    [navFifth.navigationBar setBarStyle:UIBarStyleBlack];
+    navFifth.tabBarItem.image = [[UIImage imageNamed:@"fifth_tabbar_nor"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    navFifth.tabBarItem.selectedImage = [[UIImage imageNamed:@"fifth_tabbar_sel"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+    NSArray *vcArray = [NSArray arrayWithObjects:navFirst,navSec,navThird,navFourth,navFifth, nil];
     self.viewControllers = vcArray;
     
     [[UITabBarItem appearance]setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor lightGrayColor]} forState:UIControlStateNormal];

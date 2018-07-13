@@ -17,6 +17,15 @@
 
 @implementation ThirdViewController
 
+- (void)viewWillDisappear:(BOOL)animated{
+    
+    CATransition *animation = [CATransition animation];
+//    animation.type = @"p7ageCurl";
+    animation.type = kCATransitionFade;
+    animation.duration = 0.25;
+    [self.tabBarController.view.layer addAnimation:animation forKey:@"animation"];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.

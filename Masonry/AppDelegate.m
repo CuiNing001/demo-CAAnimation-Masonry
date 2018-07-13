@@ -28,6 +28,8 @@
     [[UINavigationBar appearance]setTintColor:[UIColor whiteColor]];
     [self.window makeKeyAndVisible];
     
+//    tabBarController.delegate = self;
+    
     return YES;
 }
 

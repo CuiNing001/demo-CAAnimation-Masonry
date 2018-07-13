@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		AC76A098AE0EA644A0CF75A7 /* Pods_Masonry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6B6974F22D0C2D8C338842C /* Pods_Masonry.framework */; };
+		CE58A49D20F5A7EB00A51E76 /* FifthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE58A49C20F5A7EB00A51E76 /* FifthViewController.m */; };
+		CE58A4A020F74E3200A51E76 /* MoreAnimationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE58A49F20F74E3200A51E76 /* MoreAnimationViewController.m */; };
 		CE626BC720E5D7EE00E8B8DF /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE626BC520E5D7EE00E8B8DF /* CollectionViewCell.m */; };
 		CE626BC820E5D7EE00E8B8DF /* CollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE626BC620E5D7EE00E8B8DF /* CollectionViewCell.xib */; };
 		CE6B0B881FEA41BA005A25B9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6B0B871FEA41BA005A25B9 /* main.m */; };
@@ -46,6 +48,10 @@
 
 /* Begin PBXFileReference section */
 		60361E1F461FA66FFE168917 /* Pods-Masonry.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Masonry.release.xcconfig"; path = "Pods/Target Support Files/Pods-Masonry/Pods-Masonry.release.xcconfig"; sourceTree = "<group>"; };
+		CE58A49B20F5A7EB00A51E76 /* FifthViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FifthViewController.h; sourceTree = "<group>"; };
+		CE58A49C20F5A7EB00A51E76 /* FifthViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FifthViewController.m; sourceTree = "<group>"; };
+		CE58A49E20F74E3200A51E76 /* MoreAnimationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoreAnimationViewController.h; sourceTree = "<group>"; };
+		CE58A49F20F74E3200A51E76 /* MoreAnimationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoreAnimationViewController.m; sourceTree = "<group>"; };
 		CE626BC420E5D7EE00E8B8DF /* CollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionViewCell.h; sourceTree = "<group>"; };
 		CE626BC520E5D7EE00E8B8DF /* CollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionViewCell.m; sourceTree = "<group>"; };
 		CE626BC620E5D7EE00E8B8DF /* CollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewCell.xib; sourceTree = "<group>"; };
@@ -164,6 +170,10 @@
 				CEC592E320E47E83001FEE73 /* ThirdViewController.m */,
 				CEC592E520E47E9F001FEE73 /* FourthViewController.h */,
 				CEC592E620E47E9F001FEE73 /* FourthViewController.m */,
+				CE58A49B20F5A7EB00A51E76 /* FifthViewController.h */,
+				CE58A49C20F5A7EB00A51E76 /* FifthViewController.m */,
+				CE58A49E20F74E3200A51E76 /* MoreAnimationViewController.h */,
+				CE58A49F20F74E3200A51E76 /* MoreAnimationViewController.m */,
 				CE8EF0C420F45C6700D5EDB7 /* BezierPathViewController.h */,
 				CE8EF0C520F45C6700D5EDB7 /* BezierPathViewController.m */,
 				CE8EF0BE20F45C3300D5EDB7 /* BezierPathView.h */,
@@ -391,6 +401,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE58A4A020F74E3200A51E76 /* MoreAnimationViewController.m in Sources */,
+				CE58A49D20F5A7EB00A51E76 /* FifthViewController.m in Sources */,
 				CEC592E120E47E77001FEE73 /* SecondViewController.m in Sources */,
 				CEC592EE20E48DAC001FEE73 /* CTabbarViewController.m in Sources */,
 				CE8EF0C020F45C3300D5EDB7 /* BezierPathView.m in Sources */,
