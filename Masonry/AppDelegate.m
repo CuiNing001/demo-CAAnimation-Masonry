@@ -9,7 +9,10 @@
 #import "AppDelegate.h"
 #import "CTabbarViewController.h"
 
-@interface AppDelegate ()
+@interface AppDelegate ()<UITabBarControllerDelegate>
+
+@property(strong, nonatomic) CTabbarViewController *tabBarController;
+@property(assign, nonatomic) NSInteger selectIndex;
 
 @end
 
@@ -20,19 +23,54 @@
     // Override point for customization after application launch.
     
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
-    CTabbarViewController *tabBarController = [[CTabbarViewController alloc]init];
+    self.tabBarController = [[CTabbarViewController alloc]init];
+    
 //    [tabBarController.tabBar setBarStyle:UIBarStyleBlack];
-    self.window.rootViewController = tabBarController;
+    self.window.rootViewController = _tabBarController;
+    self.tabBarController.delegate = self;
     self.window.backgroundColor = [UIColor whiteColor];
     // 设置导航栏返回按钮颜色
     [[UINavigationBar appearance]setTintColor:[UIColor whiteColor]];
     [self.window makeKeyAndVisible];
     
-//    tabBarController.delegate = self;
+    self.selectIndex = 0;
     
     return YES;
 }
 
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
+    
+    // 获取当前页面tabbar的index,添加点击动画
+    NSInteger index = [tabBarController.viewControllers indexOfObject:viewController];
+    [self animationWithIndex:index];
+    
+    // 点击的tabbar button不是当前页面的button运行点击动画
+//    if (self.selectIndex!=index) {
+//        [self animationWithIndex:index];
+//    }
+}
+
+// tabbar点击图标添加动画
+- (void)animationWithIndex:(NSInteger )index{
+    NSMutableArray *itemArr = [NSMutableArray array];
+    for (UIView *itemView in self.tabBarController.tabBar.subviews) {
+        if ([itemView isKindOfClass:NSClassFromString(@"UITabBarButton")]) {
+            [itemArr addObject:itemView];
+        }
+    }
+    
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    animation.duration = 0.5;
+    animation.repeatCount = 1;
+    animation.fromValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(1, 1, 1)];
+    animation.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.3, 1.3, 1)];
+    [[itemArr[index] layer]addAnimation:animation forKey:nil];
+    
+    // 存储当前tabbar的index
+//    self.selectIndex = index;
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
