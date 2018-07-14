@@ -500,3 +500,132 @@ keyAnimation.keyTimes = [NSArray arrayWithObjects:number_0,number_1,number_2,num
 ```
 
 > tip:调用私有API会影响上架
+
+
+#### UIImage gif动画图片
+---
+> ##### gif动画图片
+
+```
+    /*
+     * [UIImage animationImageNamed:@"" duration:1]
+     */
+    self.gifImageView = [[UIImageView alloc]init];
+    [self.view addSubview:_gifImageView];
+    __weak typeof(self)weakSelf = self;
+    [_gifImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(weakSelf.view.mas_top).offset(100);
+        make.left.equalTo(weakSelf.view.mas_left).offset(10);
+        make.size.mas_equalTo(CGSizeMake(100, 100));
+    }];
+    self.gifImageView.image = [UIImage animatedImageNamed:@"ani_" duration:0.4];
+    
+    // 设置五秒后停止动画
+   // [self performSelector:@selector(stopImageAnimation) withObject:nil afterDelay:5];
+    
+    - (void)stopImageAnimation{
+    _gifImageView.image = [UIImage imageNamed:@"ani_0"];
+}
+```
+
+```
+    /*
+     * [UIImage animtaionWithImages:imageArr duration:1];
+     */
+    self.rabbitImageView = [[UIImageView alloc]init];
+    [self.view addSubview:_rabbitImageView];
+    [_rabbitImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.equalTo(weakSelf.gifImageView);
+        make.centerY.mas_equalTo(weakSelf.gifImageView);
+        make.left.mas_equalTo(weakSelf.gifImageView.mas_right).offset(10);
+    }];
+    UIImage *image = [UIImage animatedImageNamed:@"rabbit_" duration:1];
+    NSArray *imageArr = [NSArray arrayWithArray:image.images];
+//    NSArray *imageArr = [NSArray arrayWithObjects:[UIImage imageNamed:@"rabbit_"],
+//                                                  [UIImage imageNamed:@"rabbit_1"],
+//                                                  [UIImage imageNamed:@"rabbit_2"],nil];
+    _rabbitImageView.animationImages = imageArr;
+    _rabbitImageView.animationDuration = 2;
+    _rabbitImageView.animationRepeatCount = 0;
+    [_rabbitImageView startAnimating];
+    
+    // 设置五秒后停止动画
+//    [self performSelector:@selector(stopRabbitAnimation) withObject:nil afterDelay:5];
+
+- (void)stopRabbitAnimation{
+    [_rabbitImageView stopAnimating];
+}
+```
+
+>  <font color=red>tips:</font>
+> > * 图片名称对应:初始化名称self.gifImageView.image = [UIImage animatedImageNamed:@"ani_" duration:0.4]后系统会自动添加相同的图片(0~1024)
+> > * 动画关闭后需要重新将imageview赋值
+> > * 可以通过[UIImage animationImageNamed:@"" duration:1]的images属性获取图片数组,不用单独添加,
+> > * 重复次数animationRepeatCount=0时无限重复
+
+
+### Tabbar添加点击和切换动画
+---
+
+> <font color=cplor>点击动画</font>
+
+ * 在Appdelegate中添加tabbar代理<UITabBarControllerDelegate>
+ 
+ ```
+ self.tabBarController.delegate = self
+ ```
+ 
+ * 在代理方法中添加动画
+
+ ```
+ - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
+    
+    // 获取当前页面tabbar的index,添加点击动画
+    NSInteger index = [tabBarController.viewControllers indexOfObject:viewController];
+    [self animationWithIndex:index];
+    
+    // 点击的tabbar button不是当前页面的button运行点击动画
+//    if (self.selectIndex!=index) {
+//        [self animationWithIndex:index];
+//    }
+}
+ ```
+ 
+ * 动画方法
+
+ ```
+ - (void)animationWithIndex:(NSInteger )index{
+    NSMutableArray *itemArr = [NSMutableArray array];
+    for (UIView *itemView in self.tabBarController.tabBar.subviews) {
+        if ([itemView isKindOfClass:NSClassFromString(@"UITabBarButton")]) {
+            [itemArr addObject:itemView];
+        }
+    }
+    
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    animation.duration = 0.5;
+    animation.repeatCount = 1;
+    animation.fromValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(1, 1, 1)];
+    animation.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.3, 1.3, 1)];
+    [[itemArr[index] layer]addAnimation:animation forKey:nil];
+    
+    // 存储当前tabbar的index
+//    self.selectIndex = index;
+}
+ ```
+ 
+ 
+ > <font color=red>切换动画</font>
+ 
+  * 在ViewController的viewWillDisappear中添加动画
+  * 动画时间不能太长,不然会覆盖掉系统跳转动画
+
+  ```
+  - (void)viewWillDisappear:(BOOL)animated{
+    	CATransition *animation = [CATransition animation];
+    	animation.type = kCATransitionFade;
+    	animation.duration = 0.25;
+    	[self.tabBarController.view.layer addAnimation:animation forKey:@"animation"];
+}
+  ```
