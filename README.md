@@ -629,3 +629,327 @@ keyAnimation.keyTimes = [NSArray arrayWithObjects:number_0,number_1,number_2,num
     	[self.tabBarController.view.layer addAnimation:animation forKey:@"animation"];
 }
   ```
+
+
+###UIView动画
+---
+##### <font color=red>一:类方法动画</font>
+* <font color=orange>开始动画: </font>
+
+```
+/*
+ * 参数一: 动画标识
+ * 参数二: 附加参数,在设置代理的情况下,将此参数发送到setAnimationWillStartSelector和setAnimationDidStopSelector方法,通常情况设置为nil
+*/
+[UIView beginAnimations:(nullable NSString *) context:(nullable void *)];
+```
+
+
+* <font color=orange>参数设置: </font>
+
+```
+   //动画持续时间
+    [UIView setAnimationDuration:(NSTimeInterval)];
+```
+
+```
+    //动画的代理对象
+    [UIView setAnimationDelegate:(nullable id)];
+```
+
+```
+    //设置动画将开始时代理对象执行的SEL
+    [UIView setAnimationWillStartSelector:(nullable SEL)];
+```
+
+```
+    //设置动画结束时代理对象执行的SEL
+    [UIView setAnimationDidStopSelector:(nullable SEL)];
+```
+
+```
+    //设置动画延迟执行的时间
+    [UIView setAnimationDelay:(NSTimeInterval)];
+```
+
+```
+    //设置动画的重复次数
+    [UIView setAnimationRepeatCount:(float)];
+```
+
+```
+/*
+ * 设置动画的曲线
+ * UIViewAnimationCurve的枚举值如下：
+    UIViewAnimationCurveEaseInOut,         // 慢进慢出（默认值）
+    UIViewAnimationCurveEaseIn,            // 慢进
+    UIViewAnimationCurveEaseOut,           // 慢出
+    UIViewAnimationCurveLinear             // 匀速
+ */
+    [UIView setAnimationCurve:(UIViewAnimationCurve)];
+
+```
+
+```
+   /*
+    * 设置是否从当前状态开始播放动画
+    * 假设上一个动画正在播放，且尚未播放完毕，我们将要进行一个新的动画：
+    * 当为YES时：动画将从上一个动画所在的状态开始播放
+    * 当为NO时：动画将从上一个动画所指定的最终状态开始播放（此时上一个动画马上结束）
+    */
+    [UIView setAnimationBeginsFromCurrentState:YES];
+
+```
+
+```
+    //设置动画是否继续执行相反的动画
+    [UIView setAnimationRepeatAutoreverses:(BOOL)];
+```
+
+```
+    //是否禁用动画效果（对象属性依然会被改变，只是没有动画效果）
+    [UIView setAnimationsEnabled:(BOOL)];
+```
+
+```
+/* 设置视图的过渡效果
+ *  第一个参数：UIViewAnimationTransition的枚举值如下
+     UIViewAnimationTransitionNone,              //不使用动画
+     UIViewAnimationTransitionFlipFromLeft,      //从左向右旋转翻页
+     UIViewAnimationTransitionFlipFromRight,     //从右向左旋转翻页
+     UIViewAnimationTransitionCurlUp,            //从下往上卷曲翻页
+     UIViewAnimationTransitionCurlDown,          //从上往下卷曲翻页
+  *第二个参数：需要过渡效果的View
+  *第三个参数：是否使用视图缓存，YES：视图在开始和结束时渲染一次；NO：视图在每一帧都渲染
+ */
+    [UIView setAnimationTransition:(UIViewAnimationTransition) forView:(nonnull UIView *) cache:(BOOL)];
+
+```
+
+
+* <font color=orange>结束动画: </font>
+
+```
+[UIView commitAnimation];
+```
+
+* <font color=orange>ExampleCode: </font>
+* 可以设置的动画属性:
+* 大&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;小: frame
+* 拉&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;伸: bounds
+* 中&nbsp;&nbsp;心&nbsp;&nbsp;点: center
+* 旋&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;转: transform
+* 透&nbsp;&nbsp;明&nbsp;&nbsp;度: alpha
+* 背&nbsp;&nbsp;景&nbsp;&nbsp;色: backgroundColor
+* 拉伸内容: contentStretch
+
+```
+/*
+ * 修改view_2的frame
+ */
+    [UIView beginAnimations:@"frameAnimation" context:nil];
+    [UIView setAnimationDuration:2];
+    [UIView setAnimationRepeatCount:1.0f];
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationWillStartSelector:@selector(startAni:)];
+    [UIView setAnimationDidStopSelector:@selector(stopAni:)];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    _view_2.frame = _view_1.frame;
+    [UIView commitAnimations];
+```
+
+```
+/*
+ * 转场动画
+ */
+    [UIView beginAnimations:@"animation" context:nil];
+    [UIView setAnimationDuration:2];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    [UIView setAnimationRepeatCount:1];
+    [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp forView:view cache:YES];
+    [UIView commitAnimations];
+```
+
+
+
+###UIView动画
+---
+
+#####<font color=red>二:View类方法block动画</font>
+
+* <font color= orange>参数:时间和动画,无结束回调事件</font>
+ * @param_1:duration--动画时间
+ * @param_2:animationBlock--执行动画
+
+```
+    [UIView animateWithDuration:2 animation:^{
+        view_1.center = view_2.center;
+    }];
+```
+
+
+* <font color= orange>参数:时间和动画,有结束回调事件</font>
+ * @param_1: duration--动画时间
+ * @param_2: animations--执行动画内容
+ * @param_3: completion--动画结束回调
+
+```
+    [UIView animateWithDuration:2 animations:^{
+        view_1.layer.cornerRadius = 50;
+    } completion:^(BOOL finished){
+        NSLog(@"end of the animation");
+    }];
+```
+
+
+* <font color= orange>参数:时间/延时时间/过渡效果,有结束回调事件</font>
+ * @param_1:duration--动画持续时间
+ * @param_2:delay--动画延时执行时间
+ * @param_3:options--动画过渡效果
+ * @param_4:animations--执行动画
+ * @param_5:completion--动画结束回调
+
+```
+    [UIView animateWithDuration:2 delay:2 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        view_1.layer.cornerRadius = 5;
+        view_2.frame = view_1.frame;
+    } completion:^(BOOL finished){
+        NSLog(@"end of the animation");
+    }];
+```
+
+* <font color= orange>Spring动画参数:动画时间,延时时间/震动效果/初始速度/过渡效果,有结束回调事件</font>
+ * @param_1:duration--动画持续时间
+ * @param_2:delay--动画延时时间
+ * @param_3:usingSpringWithDamping--震动效果,范围0~1,数值越小震动效果越明显
+ * @param_4:initialSpringVelocity--初始速度,数值越大速度越快
+ * @param_5:options--动画过渡效果
+ * @param_6:animations--实现动画
+ * @param_7completion--动画结束回调
+
+```
+    [UIView animateWithDuration:2 delay:0 usingSpringWithDamping:0.5 initialSpringVelocity:10 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        view_2.frame = view_1.frame;
+    } completion:^(BOOL finished){
+    NSLog(@"end of the animation");
+    }];
+```
+
+* <font color= orange>keyframes动画参数:动画时间/延时时间/过渡效果,需要在动画回调内添加关键帧,有结束回调事件</font>
+ * @param_1:duration--动画持续时间
+ * @param_2:delay--动画延时开始时间
+ * @param_3:options--动画过渡效果
+ * @param_4:animations--动画过程
+ * @param_4\_1:startTime--动画开始时间
+ * @param_4\_2:relativeDuration--动画持续时间
+ * @param_4\_3:animations:--当前关键帧动画过程
+ * @param_5:completion--动画结束回调
+
+```
+    [UIView animateKeyframesWithDuration:8.0f delay:0 options:UIViewKeyframeAnimationOptionCalculationModeCubicPaced animations:^{
+        [UIView addKeyframeWithRelativeStartTime:.0f relativeDuration:1.0/4 animations:^{
+                  view_1.backgroundColor = COLOR_RANDOM;
+                }];
+                [UIView addKeyframeWithRelativeStartTime:1.0/4 relativeDuration:1.0/4 animations:^{
+                    view_2.frame = CGRectMake(50, view_1.frame.origin.y-10-view_1.frame.size.height*0.7, 100, 100);
+                view_2.layer.cornerRadius = 50;
+             }];
+             [UIView addKeyframeWithRelativeStartTime:1.0/4 relativeDuration:1.0/4 animations:^{
+                view_1.backgroundColor = COLOR_RANDOM;
+                    view_2.center = view_1.center;
+             }];
+                [UIView addKeyframeWithRelativeStartTime:1.0/4 relativeDuration:1.0/4 animations:^{
+                    view_1.backgroundColor = COLOR_RANDOM;
+                 view_2.frame = CGRectMake(50, view_1.frame.origin.y-10-view_1.frame.size.height*0.7, view_1.frame.size.width*0.7, view_1.frame.size.height*0.7);
+                view_2.layer.cornerRadius = 5;
+                  }];
+    } completion:^(BOOL finished){
+        NSLog(@"end of the animation");
+    }];
+```
+
+
+* <font color= orange>transition动画参数:[单个视图转场:转场动画view,动画时间,有结束回调事件]/[两个视图转场:fromView/toView/动画时间,会将fromView从视图中删除,将toView添加到视图]</font>
+
+ > 单个视图转场动画
+  * @param_1:view--需要动画的view
+  * @param_2:duration--动画时间
+  * @param_3:options--动画过渡效果
+  * @param_4:animations--动画过程
+  * @param_5:completion--动画结束回调
+
+ ```
+    [UIView  transitionWithView:view_1 duration options:UIViewAnimationOptionTransitionFilpFromBotton animations:^{
+        label_3.text = @"label_3";
+    } completion:^(BOOL finished){
+        NSLolg(@"end of the animation");
+    }];
+ ```
+
+   > 两个视图转场动画
+   
+    * @param_1:fromView--转场动画view
+    * @param_2:toView--转场后显示的view
+    * @param_3:duration--动画持续时间
+    * @param_4:options--动画效果
+    * @param_5:complet--动画结束后回调
+    * tip:此动画会将fromView从父视图删除,然后将toView添加到父视图
+    
+    ```
+        UIView *view_4 = [[UIView alloc]initWithFrame:view_3.frame];
+        [self.view addSubView:view_4];
+        view_4.backgroundColor = COLOR_RANDOM;
+        [UIView transitionFromView:view_3 toView view_4 duration:2 options:UIViewAnimationOptionTransitionCrossDissolve completion:^(BOOL finished){
+            NSLog(@"end of the animation");
+        }];
+    ```
+    
+* <font color=#006400> UIViewAnimationOptions类型,可组合使用</font>
+
+ | 类型 | 效果 |
+|:--|:--|
+| <font color=#1E90FF>UIViewAnimationOptionLayoutSubviews</font> | 进行动画时布局子控件 |
+| <font color=#1E90FF>UIViewAnimationOptionAllowUserInteraction</font> | 进行动画时允许用户交互 |
+| <font color=#1E90FF>UIViewAnimationBeginFromCurrentState</font> | 从当前状态开始动画  |
+| <font color=#1E90FF> UIViewAnimationOptionRepeat </font> | 无线重复执行动画  |
+| <font color=#1E90FF> UIViewAnimationOptionAutoreverse </font> | 执行动画回路  |
+| <font color=#1E90FF> UIViewAnimationOptionOverrideInheritedDuration </font> | 忽略嵌套动画执行的时间设置  |
+| <font color=#1E90FF> UIViewAnimationOptionOverrideInheritedCurve </font> | 忽略嵌套动画的曲线设置  |
+| <font color=#1E90FF> UIViewAnimationOptionAllowAnimatedContent </font> | 转场动画:进行动画时重绘视图  |
+| <font color=#1E90FF> UIViewAnimationOptionShowHideTransitionViews </font> | 转场动画:添加和移除土城的动画效果  |
+| <font color=#1E90FF> UIViewAnimationOptionOverrideInheritedOptions </font> | 不继承父动画设置 |
+| <font color=#1E90FF> UIViewAnimationOptionCurveEaseInOut </font> |  时间曲线:慢进慢出 |
+| <font color=#1E90FF> UIViewAnimationOptionCurveEaseIn </font> | 时间曲线:慢进  |
+| <font color=#1E90FF> UIViewAnimationOptionCurveEaseOut </font> | 时间曲线:慢出  |
+| <font color=#1E90FF> UIViewAnimationOptionCurveLinear </font> | 时间曲线:匀速  |
+| <font color=#1E90FF> UIViewAnimationOptionTransitionNone </font> | 转场:不使用动画  |
+| <font color=#1E90FF> UIViewAnimationOptionTransitionFlipFromLeft </font> | 转场:从左向右旋转翻页  |
+| <font color=#1E90FF> UIViewAnimationOptionTransitionFlipFromRight </font> | 转场:从右向左旋转翻页  |
+| <font color=#1E90FF> UIViewAnimationOptionTransitionCurlUp </font> | 转场:从下往上卷曲翻页  |
+| <font color=#1E90FF> UIViewAnimationOptionTransitionCurlDown </font> | 转场:从上往下卷曲翻页 |
+| <font color=#1E90FF> UIViewAnimationOptionTransitionCrossDissolve </font> | 转场:交叉消失和出现  |
+| <font color=#1E90FF> UIViewAnimationOptionTransitionFlipFromTop </font> | 转场:从上向下旋转翻页  |
+| <font color=#1E90FF> UIViewAnimationOptionTransitionFlipFromBottom </font> | 转场:从下向上旋转翻页  |
+
+* <font color=#006400> UIViewKeyframeAnimationOptions类型,可组合使用</font>
+
+ | 类型 | 效果 |
+|:--|:--|
+| <font color=#1E90FF> UIViewAnimationOptionLayoutSubviews </font> | 进行动画时布局子控件 |
+| <font color=#1E90FF> UIViewAnimationOptionAllowUserInteraction </font> | 进行动画时允许用户交互 |
+| <font color=#1E90FF> UIViewAnimationOptionBeginFromCurrentState </font> | 从当前状态开始执行动画 |
+| <font color=#1E90FF> UIViewAnimationOptionRepeat </font> | 无限重复执行动画 |
+| <font color=#1E90FF> UIViewAnimationOptionAutoreverse </font> | 执行动画回路 |
+| <font color=#1E90FF> UIViewAnimationOptionOverrideInheritedDuration </font> | 忽略嵌套动画的执行时间设置 |
+| <font color=#1E90FF> UIViewAnimationOptionOverrideInheritedOptions </font> | 不继承父动画设置 |
+| <font color=#1E90FF> UIViewKeyframeAnimationOptionCalculationModeLinear </font> | 动画模式:连续执行 |
+| <font color=#1E90FF> UIViewKeyframeAnimationOptionCalculationModeDiscrete </font> | 动画模式:离散运行 |
+| <font color=#1E90FF> UIViewKeyframeAnimationOptionCalculationModePaced </font> | 动画模式:均匀执行 |
+| <font color=#1E90FF> UIViewKeyframeAnimationOptionCalculationModeCubic </font> | 动画模式:平滑执行 |
+| <font color=#1E90FF> UIViewKeyframeAnimationOptionCalculationModeCubicPaced </font> | 动画模式:平滑均匀执行 |
+
+
+
+
+
+

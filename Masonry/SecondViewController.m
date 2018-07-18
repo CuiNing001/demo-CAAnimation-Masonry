@@ -291,7 +291,7 @@
     CABasicAnimation *scale = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
     scale.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
 //    scale.fromValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(1, 1, 1)];
-//    scale.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(2, 2, 2)];
+//    scale.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(2, 2, 1)];
     scale.toValue = [NSNumber numberWithFloat:0.5];
     scale.removedOnCompletion = YES;
     scale.duration = 2;
